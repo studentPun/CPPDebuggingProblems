@@ -58,8 +58,11 @@ int main(int argc, char* argv[])
             {
                 currentRecordIdx = 0;
             }
-            currentRecord = data.GetRecord(currentRecordIdx);
-            recordTexture = LoadTextureFromImage(currentRecord->image);
+            else {
+                currentRecord = data.GetRecord(currentRecordIdx);
+                UnloadTexture(recordTexture);
+                recordTexture = LoadTextureFromImage(currentRecord->image);
+            }
         }
 
         if (IsKeyPressed(KEY_RIGHT))
@@ -69,8 +72,11 @@ int main(int argc, char* argv[])
             {
                 currentRecordIdx = data.GetRecordCount() - 1; //prevents indexOutOfBounds errors
             }
-            currentRecord = data.GetRecord(currentRecordIdx);
-            recordTexture = LoadTextureFromImage(currentRecord->image);
+            else {
+                currentRecord = data.GetRecord(currentRecordIdx);
+                UnloadTexture(recordTexture);
+                recordTexture = LoadTextureFromImage(currentRecord->image);
+            }
         }
 
 
