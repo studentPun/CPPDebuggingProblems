@@ -56,11 +56,11 @@ int main(int argc, char* argv[])
             currentRecordIdx--;
             if (currentRecordIdx < 0)
             {
-                currentRecordIdx = 0;
+                currentRecordIdx = 0; //prevents indexOutOfBounds errors
             }
             else {
                 currentRecord = data.GetRecord(currentRecordIdx);
-                UnloadTexture(recordTexture);
+                UnloadTexture(recordTexture); //prevent filling V-RAM 
                 recordTexture = LoadTextureFromImage(currentRecord->image);
             }
         }
@@ -74,7 +74,7 @@ int main(int argc, char* argv[])
             }
             else {
                 currentRecord = data.GetRecord(currentRecordIdx);
-                UnloadTexture(recordTexture);
+                UnloadTexture(recordTexture); //prevent filling V-RAM 
                 recordTexture = LoadTextureFromImage(currentRecord->image);
             }
         }
