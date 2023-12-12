@@ -30,11 +30,22 @@ DataFile::Record* DataFile::GetRecord(int index)
 {
 	//check if file exists
 	if (fileName == "") { throw "File not loaded"; }
+	//check if recordCount has been read
+	if (recordCount <= 0) {
+		ifstream infile(fileName, ios::binary);
+		recordCount = 0;
+		infile.read((char*)&recordCount, sizeof(int));
+		infile.close();
+	}
 	//check if index is valid for the loaded file
 	if (index > recordCount) { throw "Index out of bounds"; }
-	//load until index is reached
-	while (index >= records.size()) {
-		LoadRecord(records.size());
+	//make room for the records in the current file
+	if (recordCount != records.size()) {
+		records.resize(recordCount);
+	}
+	//if you haven't already, load the requested index
+	if (records[index] == nullptr) {
+		LoadRecord(index);
 	}
 	return records[index];
 }
@@ -126,7 +137,7 @@ void DataFile::LoadRecord(int currentIndex)
 		r->name = string(name);
 		r->name.resize(nameSize); //strings initialize with a set size
 		r->age = age;
-		records.push_back(r);
+		records[ind] = r;
 
 		delete[] imgdata;
 		delete[] name;

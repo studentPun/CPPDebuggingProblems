@@ -60,7 +60,7 @@ int main(int argc, char* argv[])
             }
             else {
                 currentRecord = data.GetRecord(currentRecordIdx);
-                UnloadTexture(recordTexture); //prevent filling V-RAM 
+                UnloadTexture(recordTexture); //prevent filling RAM with textures
                 recordTexture = LoadTextureFromImage(currentRecord->image);
             }
         }
@@ -74,7 +74,7 @@ int main(int argc, char* argv[])
             }
             else {
                 currentRecord = data.GetRecord(currentRecordIdx);
-                UnloadTexture(recordTexture); //prevent filling V-RAM 
+                UnloadTexture(recordTexture); //prevent filling RAM with textures
                 recordTexture = LoadTextureFromImage(currentRecord->image);
             }
         }
